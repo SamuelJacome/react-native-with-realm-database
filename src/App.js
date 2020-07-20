@@ -1,18 +1,38 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, {useState} from 'react';
+import { StatusBar } from 'react-native';
 
-// import { Container } from './styles';
+import { Container, Title, Input, Button, CenterView, List } from './styles';
 
-const src = () => {
+const App = () => {
   return (
   
-  <View>
-    <Text>Hello</Text>
+  <Container>
+    <StatusBar 
+    backgroundColor="transparent" 
+    translucent={true}
+    barStyle="light-content"
+    />
+    <Title>Nome</Title>
+    <Input 
+    autoCapitalize="none" 
+    autoCorrect={false} 
+    value={nome} 
+    onChangeText={()=>{}}/>
 
-  </View>
+
+    <Title>Cargo</Title>
+    <Input 
+    autoCapitalize="none" 
+    autoCorrect={false} 
+    value={cargo} 
+    onChangeText={()=>{}}/>
+
+   
+
+  </Container>
   
   
   );
 }
 
-export default src;
+export default App;
