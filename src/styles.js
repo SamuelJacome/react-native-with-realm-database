@@ -35,7 +35,7 @@ padding: 5px;
 
 
 export const CenterView = styled.View`
-justify-content: center;
+justify-content: space-around;
 align-items: center;
 flex-direction: row
 `;
