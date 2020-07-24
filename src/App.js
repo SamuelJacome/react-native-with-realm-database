@@ -75,6 +75,20 @@ function App () {
       return;
 
     }
+    const response = {
+      id: idEdit,
+      name: name,
+      office: office,
+    }
+    realm.write(()=>{
+      realm.create('Job', response, 'modified'); // o parametro modified verifica se o id já existe, se já existe ele vai atualizar.
+    })
+    const dataChanged = jobs.map( job => (job.id === response.id ? response : job));
+    setJobs(dataChanged)
+    setName('');
+    setOffice('');
+    setIdEdit(null);
+    Keyboard.dismiss();
   }
 
   return (
