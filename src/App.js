@@ -49,7 +49,9 @@ function App () {
   async function saveJob(){
     const realm = await getRealm();
 
-    const id = realm.objects('Job').length +1;
+    //const id = realm.objects('Job').length +1;
+    const id = realm.objects('Job').sorted('id', true).length > 0 
+    ? realm.objects('Job').sorted('id', true)[0].id + 1 : 1;
 
     const jobs = {
       id: id,
