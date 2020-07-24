@@ -56,7 +56,7 @@ function App () {
      {
        id: 1,
        name: 'Samuel',
-       office: 'developer'
+       office: 'developer react-native'
 
      }
    ]}

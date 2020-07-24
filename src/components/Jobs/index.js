@@ -12,11 +12,11 @@ const Jobs = ({data}) => {
 
 
   <CenterView>
-    <EditItem>
+    <EditItem onPress = {()=>{}}>
       <EditText> Edit </EditText>
     </EditItem>
 
-    <EditItem>
+    <EditItem onPress = {()=>{}}>
       <EditText> Delete </EditText>
     </EditItem>
 

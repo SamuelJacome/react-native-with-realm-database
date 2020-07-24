@@ -38,13 +38,16 @@ margin-top: 15px;
 
 
 export const EditItem = styled.TouchableOpacity`
-
+background-color: #DDD;
+padding: 5px;
+border-radius: 5px;
 
 `;
 
 
 export const EditText = styled.Text`
-
+color: #000;
+font-size: 15px;
 
 `;
 
