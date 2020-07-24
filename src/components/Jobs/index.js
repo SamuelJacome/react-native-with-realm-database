@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import { Container, Name, Office, CenterView, EditItem, EditText } from './styles';
 
-const Jobs = ({data}) => {
+const Jobs = ({data, edit}) => {
   return (
   <Container>
 
@@ -12,7 +12,7 @@ const Jobs = ({data}) => {
 
 
   <CenterView>
-    <EditItem onPress = {()=>{}}>
+    <EditItem onPress = {()=>{edit(data)}}>
       <EditText> Edit </EditText>
     </EditItem>
 

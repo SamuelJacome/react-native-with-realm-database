@@ -9,6 +9,7 @@ function App () {
 
   const [name, setName] = useState('');
   const [office, setOffice] = useState('');
+  const [idEdit, setIdEdit] = useState(null);
   const [jobs, setJobs] = useState([])
 
 
@@ -58,6 +59,24 @@ function App () {
     });
   }
 
+  function editJob(data){
+
+    setName(data.name);
+    setOffice(data.office);
+    setIdEdit(data.id);
+
+
+  }
+
+  async function uptadeJob(){
+    const realm = await getRealm();
+    if(idEdit ===  null){
+      alert('Selecione o botão edit do profissional que deseja alterar abaixo')
+      return;
+
+    }
+  }
+
   return (
   
   <Container>
@@ -91,7 +110,7 @@ function App () {
       </Button>
 
 
-      <Button>
+      <Button onPress={uptadeJob}>
         <TextButton>
           Editar
         </TextButton>
@@ -104,7 +123,7 @@ function App () {
    data={jobs}
    keyExtractor={item=> String(item.id)}
    renderItem={({item}) =>(
-     <Jobs data={item}/>
+     <Jobs data={item} edit={editJob}/>
    )}
    
    />
