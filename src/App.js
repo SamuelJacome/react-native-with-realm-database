@@ -3,6 +3,7 @@ import { StatusBar, Keyboard } from 'react-native';
 import getRealm from './services/realm'
 import { Container, Title, Input, Button, CenterView, List, TextButton } from './styles';
 import Jobs from './components/Jobs'
+import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 
 
 function App () {
@@ -18,6 +19,8 @@ function App () {
       const realm = await getRealm();
       const data =  realm.objects('Job');
       setJobs(data)
+
+    
     }
     loadJobs();
 
@@ -91,6 +94,22 @@ function App () {
     Keyboard.dismiss();
   }
 
+  async function deleteJob(data){
+    const realm = await getRealm();
+    const ID = data.id;
+    realm.write(()=>{
+      if(realm.objects('Job').filtered('id ='+ ID).length > 0){
+        realm.delete(
+          realm.objects('Job').filtered('id ='+ ID)
+        );
+
+      }
+    });
+
+    const JobsUpdateList = realm.objects('Job');
+    setJobs(JobsUpdateList);
+  }
+
   return (
   
   <Container>
@@ -137,7 +156,7 @@ function App () {
    data={jobs}
    keyExtractor={item=> String(item.id)}
    renderItem={({item}) =>(
-     <Jobs data={item} edit={editJob}/>
+     <Jobs data={item} edit={editJob} delet={deleteJob}/>
    )}
    
    />
