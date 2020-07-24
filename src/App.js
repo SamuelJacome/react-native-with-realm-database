@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StatusBar, Keyboard } from 'react-native';
 import getRealm from './services/realm'
 import { Container, Title, Input, Button, CenterView, List, TextButton } from './styles';
@@ -12,7 +12,16 @@ function App () {
   const [jobs, setJobs] = useState([])
 
 
- 
+  useEffect(() => {  
+    async function loadJobs(){
+      const realm = await getRealm();
+      const data =  realm.objects('Job');
+      setJobs(data)
+    }
+    loadJobs();
+
+
+  }, []);
   async function addjob(){
     try{
 
@@ -92,14 +101,7 @@ function App () {
 
    <List 
    keyboardShouldPersistTaps="handled"
-   data={[
-     {
-       id: 1,
-       name: 'Samuel',
-       office: 'developer react-native'
-
-     }
-   ]}
+   data={jobs}
    keyExtractor={item=> String(item.id)}
    renderItem={({item}) =>(
      <Jobs data={item}/>
