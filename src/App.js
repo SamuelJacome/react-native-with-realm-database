@@ -1,13 +1,53 @@
 import React, {useState} from 'react';
-import { StatusBar } from 'react-native';
-
+import { StatusBar, Keyboard } from 'react-native';
+import getRealm from './services/realm'
 import { Container, Title, Input, Button, CenterView, List, TextButton } from './styles';
 import Jobs from './components/Jobs'
+
+
 function App () {
 
   const [name, setName] = useState('');
   const [office, setOffice] = useState('');
   const [jobs, setJobs] = useState([])
+
+
+ 
+  async function addjob(){
+    try{
+
+      if (name === '' || office === ''){
+        alert('preencha todos os campos')
+        return;
+      }
+
+
+      const data = {name: name, office: office}
+      await saveJob(data)
+
+      setName('');
+      setOffice('');
+      Keyboard.dismiss();
+    }catch(err){
+      alert(err)
+    }
+  }
+
+  async function saveJob(){
+    const realm = await getRealm();
+
+    const id = realm.objects('Job').length +1;
+
+    const jobs = {
+      id: id,
+      name: name,
+      office: office
+    }
+
+    realm.write(()=>{
+      realm.create('Job', jobs);
+    });
+  }
 
   return (
   
@@ -35,7 +75,7 @@ function App () {
 
     <CenterView>
 
-      <Button>
+      <Button onPress={addjob}> 
         <TextButton>
           Cadastrar
         </TextButton>
